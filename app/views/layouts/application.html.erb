@@ -24,10 +24,13 @@
 
   <body>
     <nav>
+      <%= link_to "All events", events_path %>
+      <%= link_to "My events", user_path(current_user.id) unless current_user.nil?%>
+
       <% if signed_in? %>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete  %>
+        <%= link_to "Sign out", sign_out_path %>
       <% else %>
-        <%= button_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign in", sign_in_path %>
       <% end %>
     </nav>
 
