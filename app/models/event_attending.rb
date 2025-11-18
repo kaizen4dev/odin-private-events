@@ -1,4 +1,4 @@
 class EventAttending < ApplicationRecord
   belongs_to :attendee
-  belongs_to :atteneded_event
+  belongs_to :attended_event
 end
