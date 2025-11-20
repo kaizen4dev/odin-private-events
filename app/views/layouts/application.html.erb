@@ -35,6 +35,10 @@
       <% end %>
     </nav>
 
+    <% flash.each do |name, message| %>
+      <p class="<%= name %>"><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
