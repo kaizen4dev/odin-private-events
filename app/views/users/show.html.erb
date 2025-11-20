@@ -1,8 +1,18 @@
-<h1>Events created by <%= @user.email %></h1>
+<h2>Events created by <%= @user.email %></h2>
 
 <% @user.created_events.each do |event| %>
   <hr>
-  <h2><%= link_to event.name, event_path(event.id) %></h2>
+  <h3><%= link_to event.name, event_path(event.id) %></h3>
+  <p>Id: <%= event.id %></p>
+  <p>Location: <%= event.location %></p>
+  <p>Time: <%= event.time %></p>
+<% end %>
+
+<h2>Events attended by <%= @user.email %></h2>
+
+<% @user.attended_events.each do |event| %>
+  <hr>
+  <h3><%= link_to event.name, event_path(event.id) %></h3>
   <p>Id: <%= event.id %></p>
   <p>Location: <%= event.location %></p>
   <p>Time: <%= event.time %></p>
