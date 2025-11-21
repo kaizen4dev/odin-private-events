@@ -4,4 +4,8 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_attendings
 
   default_scope {order :time}
+
+  current_time = Time.now.strftime "%Y-%m-%dT%T" # using default time format of datatime_field
+  scope :past, -> { where "time < ?", [ current_time ] }
+  scope :upcoming, -> { where "time > ?", [ current_time ] }
 end
