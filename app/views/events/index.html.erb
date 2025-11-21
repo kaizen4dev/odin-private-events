@@ -1,4 +1,9 @@
 <h1>All events</h1>
 
-<%= render(partial: "shared/event_cards", collection: @events, as: :event) ||
-  render(inline: "<p>There are no events yet.</p>") %>
+<h2>Upcoming</h2>
+<%= render(partial: "shared/event_cards", collection: @events.upcoming, as: :event) ||
+  render(inline: "<p>There are no upcoming events yet.</p>") %>
+
+<h2>Past</h2>
+<%= render(partial: "shared/event_cards", collection: @events.past, as: :event) ||
+  render(inline: "<p>There are no past events yet.</p>") %>
