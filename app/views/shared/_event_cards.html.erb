@@ -1,13 +1,13 @@
-  <hr>
-  <h3><%= link_to event.name, event_path(event.id) %></h3>
-  <p>Host: <%= User.find(event.creator_id).email %></p>
-  <p>Location: <%= event.location %></p>
-  <p>Time: <%= event.time %></p>
-  <% if event.attendee_ids.none?(current_user.id) %>
-    <%= button_to "Join Event", event_attendings_path, params: { user_id: current_user.id, event_id: event.id } %>
-  <% else %>
-    <!-- for some unknown to me reason, you need to pass id to delete method. Even if you don't have such column in the table. And yes, -->
-    <!-- I did try to pass [current_user.id, event.id] as an id, it did not work. I'm really mad for losing hours of my sleep just to -->
-    <!-- search for "proper" solution, at this point I just give up. -->
-    <%= button_to "Leave Event", event_attending_path(user_id: current_user.id, event_id: event.id, id: 0), method: :delete %>
-  <% end %>
+<hr>
+<h3><%= link_to event.name, event_path(event.id) %></h3>
+<p>Host: <%= User.find(event.creator_id).email %></p>
+<p>Location: <%= event.location %></p>
+<p>Time: <%= event.time %></p>
+<% if event.attendee_ids.none?(current_user.id) %>
+  <%= button_to "Join Event", event_attendings_path, params: { user_id: current_user.id, event_id: event.id } %>
+<% else %>
+  <!-- for some unknown to me reason, you need to pass id to delete method. Even if you don't have such column in the table. And yes, -->
+  <!-- I did try to pass [current_user.id, event.id] as an id, it did not work. I'm really mad for losing hours of my sleep just to -->
+  <!-- search for "proper" solution, at this point I just give up. -->
+  <%= button_to "Leave Event", event_attending_path(user_id: current_user.id, event_id: event.id, id: 0), method: :delete %>
+<% end %>
