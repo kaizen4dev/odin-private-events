@@ -8,7 +8,7 @@ class EventAttendingsController < ApplicationController
   end
 
   def destroy
-    @event_attending = EventAttending.find [params[:user_id], params[:event_id]]
+    @event_attending = EventAttending.find [ params[:user_id], params[:event_id] ]
     @event_attending.destroy
     redirect_back fallback_location: root_path, notice: "You left the event."
   end
