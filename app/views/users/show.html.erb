@@ -4,6 +4,15 @@
   render(inline: "<p>You don't have created events.</p>")%>
 
 <h2>Events attended by <%= @user.email %></h2>
+<%# "%Y-%m-%dT%T" is a default format for datetime_field, which we're using %>
+<% current_time = Time.now.strftime "%Y-%m-%dT%T" %>
+<% upcoming_attended_events = @user.attended_events.where("time > ?", [ current_time ]) %>
+<% past_attended_events = @user.attended_events.where("time < ?", [ current_time ]) %>
 
-<%= render(partial: "shared/event_cards", collection: @user.attended_events, as: :event) ||
+<h3>Upcoming</h3>
+<%= render(partial: "shared/event_cards", collection: upcoming_attended_events, as: :event) ||
+  render(inline: "<p>You aren't attending any events.</p>") %>
+
+<h3>Passed</h3>
+<%= render(partial: "shared/event_cards", collection: past_attended_events, as: :event) ||
   render(inline: "<p>You aren't attending any events.</p>") %>
