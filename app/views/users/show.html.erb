@@ -1,19 +1,9 @@
 <h2>Events created by <%= @user.email %></h2>
 
-<% @user.created_events.each do |event| %>
-  <hr>
-  <h3><%= link_to event.name, event_path(event.id) %></h3>
-  <p>Id: <%= event.id %></p>
-  <p>Location: <%= event.location %></p>
-  <p>Time: <%= event.time %></p>
-<% end %>
+<%= render(partial: "shared/event_cards", collection: @user.created_events, as: :event) ||
+  render(inline: "<p>You don't have created events.</p>")%>
 
 <h2>Events attended by <%= @user.email %></h2>
 
-<% @user.attended_events.each do |event| %>
-  <hr>
-  <h3><%= link_to event.name, event_path(event.id) %></h3>
-  <p>Id: <%= event.id %></p>
-  <p>Location: <%= event.location %></p>
-  <p>Time: <%= event.time %></p>
-<% end %>
+<%= render(partial: "shared/event_cards", collection: @user.attended_events, as: :event) ||
+  render(inline: "<p>You aren't attending any events.</p>") %>
