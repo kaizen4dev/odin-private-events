@@ -1,9 +1,10 @@
-<h1>All events</h1>
+<h1>Public events</h1>
+<% events = @events.public_visibility %>
 
 <h2>Upcoming</h2>
-<%= render(partial: "shared/event_cards", collection: @events.upcoming, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: events.upcoming, as: :event) ||
   render(inline: "<p>There are no upcoming events yet.</p>") %>
 
 <h2>Past</h2>
-<%= render(partial: "shared/event_cards", collection: @events.past, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: events.past, as: :event) ||
   render(inline: "<p>There are no past events yet.</p>") %>

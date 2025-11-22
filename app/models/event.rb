@@ -8,4 +8,6 @@ class Event < ApplicationRecord
   current_time = Time.now.strftime "%Y-%m-%dT%T" # using default time format of datatime_field
   scope :past, -> { where "time < ?", [ current_time ] }
   scope :upcoming, -> { where "time > ?", [ current_time ] }
+
+  enum :visibility, { public: 0, private: 1 }, suffix: true
 end

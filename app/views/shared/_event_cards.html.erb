@@ -3,6 +3,7 @@
 <p>Host: <%= User.find(event.creator_id).email %></p>
 <p>Location: <%= event.location %></p>
 <p>Time: <%= event.time.sub("T", ", ") %></p>
+<p>Type: <%= event.public_visibility? ? "public" : "private" %></p>
 <div class="card-buttons" style="display: flex; gap: 5px">
 <% if event.attendee_ids.none?(current_user.id) %>
   <%= button_to "Join", event_attendings_path, params: { user_id: current_user.id, event_id: event.id } %>

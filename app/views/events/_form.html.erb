@@ -15,6 +15,11 @@
   </div>
 
   <div>
+    <%= event.checkbox :visibility, checked: true %>
+    <%= event.label :visibility, "Private" %>
+  </div>
+
+  <div>
     <%= event.submit %>
   </div>
 <% end %>

@@ -57,6 +57,8 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.expect event: [ :name, :time, :location ]
+    p = params.expect event: [ :name, :time, :location, :visibility ]
+    p[:visibility] = p[:visibility].to_i
+    p
   end
 end

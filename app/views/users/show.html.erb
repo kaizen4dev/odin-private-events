@@ -1,19 +1,21 @@
 <h2>Events created by <%= @user.email %></h2>
+<% created_events = @user.id == current_user.id ? @user.created_events : @user.created_events.public_visibility %>
+<% attended_events = @user.id == current_user.id ? @user.attended_events : @user.attended_events.public_visibility %>
 
 <h3>Upcoming</h3>
-<%= render(partial: "shared/event_cards", collection: @user.created_events.upcoming, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: created_events.upcoming, as: :event) ||
   render(inline: "<p>User has no created events.</p>")%>
 
 <h3>Passed</h3>
-<%= render(partial: "shared/event_cards", collection: @user.created_events.past, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: created_events.past, as: :event) ||
   render(inline: "<p>User has no created events.</p>")%>
 
 <h2>Events attended by <%= @user.email %></h2>
 
 <h3>Upcoming</h3>
-<%= render(partial: "shared/event_cards", collection: @user.attended_events.upcoming, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: attended_events.upcoming, as: :event) ||
   render(inline: "<p>You aren't attending any events.</p>") %>
 
 <h3>Passed</h3>
-<%= render(partial: "shared/event_cards", collection: @user.attended_events.past, as: :event) ||
+<%= render(partial: "shared/event_cards", collection: attended_events.past, as: :event) ||
   render(inline: "<p>You aren't attending any events.</p>") %>

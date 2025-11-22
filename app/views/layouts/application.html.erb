@@ -24,7 +24,7 @@
 
   <body>
     <nav>
-      <%= link_to "All events", events_path %>
+      <%= link_to "Public events", events_path %>
       <%= link_to "My events", user_path(current_user.id) unless current_user.nil?%>
       <%= link_to "New event", new_event_path %>
 
