@@ -3,6 +3,7 @@
 <p>Host: <%= User.find(event.creator_id).email %></p>
 <p>Location: <%= event.location %></p>
 <p>Time: <%= event.time.sub("T", ", ") %></p>
+<div class="card-buttons" style="display: flex">
 <% if event.attendee_ids.none?(current_user.id) %>
   <%= button_to "Join Event", event_attendings_path, params: { user_id: current_user.id, event_id: event.id } %>
 <% else %>
@@ -11,3 +12,8 @@
   <!-- search for "proper" solution, at this point I just give up. -->
   <%= button_to "Leave Event", event_attending_path(user_id: current_user.id, event_id: event.id, id: 0), method: :delete %>
 <% end %>
+
+<% if event.creator_id == current_user.id %>
+  <%= link_to "Edit Event", edit_event_path(id: event.id) %>
+<% end %>
+</div>

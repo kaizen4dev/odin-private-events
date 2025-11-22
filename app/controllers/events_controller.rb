@@ -21,6 +21,27 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
   end
 
+  def edit
+    @event = Event.find params[:id]
+
+    if @event.creator_id != current_user.id
+      redirect_back fallback_location: root_path, notice: "You can't edit this event."
+      return
+    end
+  end
+
+  def update
+    @event = Event.find params[:id]
+
+    return render :edit, status: :forbidden unless @event.creator_id == current_user.id
+
+    if @event.update(event_params)
+      redirect_to @event
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def event_params
