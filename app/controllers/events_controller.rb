@@ -42,6 +42,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = Event.find params[:id]
+
+    if @event.creator_id != current_user.id
+      redirect_back fallback_location: root_path, status: :forbidden, notice: "You can't delete this event."
+      return
+    end
+
+    @event.destroy
+    redirect_back fallback_location: root_path, notice: "You deleted an event."
+  end
+
   private
 
   def event_params
