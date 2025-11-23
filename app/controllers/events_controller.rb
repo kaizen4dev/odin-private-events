@@ -19,6 +19,13 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
+    is_creator = @event.creator_id == current_user.id
+    is_invited = @event.event_invites.any? { |invite| invite.invited_user_id == current_user.id }
+    is_attending = @event.attendee_ids.any?(current_user.id)
+
+    unless @event.public_visibility? || is_creator || is_invited || is_attending
+      redirect_back fallback_location: root_path, status: 403, notice: "This event is private."
+    end
   end
 
   def edit
